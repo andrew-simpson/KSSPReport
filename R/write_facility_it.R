@@ -1,3 +1,42 @@
+#' Write NSSP BioSense Platform Data Quality Summary Reports for one Facility, Use excel as input
+#'
+#' @description
+#' This performs `write_facilty_report`  function for all . It will generate summary report for all specified facility.
+#' This function uses excel generated information although one can override the information from the input.xlsx
+#' The summary workbook shows percents and counts of nulls and invalids, Additionally it generates a timeliness
+#' report and creates a table. The program can send out a report to designated email address
+#' 
+#' @param input location of input.xlsx file.
+#' @param username Your BioSense username, as a string. This is the same username you may use to log into RStudio or Adminer.
+#' @param password Your BioSense password, as a string. This is the same password you may use to log into RStudio or Adminer.
+#' @param table The table that you want to retrieve the data from, as a string.
+#' @param mft The MFT (master facilities table) from where the facility name will be retrieved, as a string.
+#' @param start The start date time that you wish to begin pulling data from, as a string.
+#' @param end The end data time that you wish to stop pulling data from, as a string.
+#' @param facility The C_Biosense_Facility_ID for the facility that you wish to generate and write the report for.
+#' @param directory The directory where you would like to write the reports to (i.e., "~/Documents/MyReports"), as a string.
+#' @param field Default NA. Can add a string with delimiter of ':'. Only fields that countain those words will be included in the final report.
+#' @param exclude Default NA. Can add a string with delimiter of ':'. Exclude fields with certain keywords in the final report.
+#' @param optional Default True. If False then remove all optional fields
+#' @param email Default False. If True, then the function will atempt to send out a form
+#' @param sender Email address of sender. Make sure it's kdhe.KS.gov
+#' @param receiver Email address of receiver.
+#' @param email_password Your Email Password
+#' @param personname Your Name to be used in your email text
+#' @param title Your job title to be used in your email text
+#' @param phone Your phone number to be used in your email text
+#'  @param message The email message to be sent. Allows for composition of costume messages.
+#' @examples 
+#' library(biosensequality)
+#' write_facility_excel("Input.xlsx")
+#' ## You can override options from input by filling in the parameters you need to override
+#' write_facility_excel("Input.xlsx", email=F)
+#' @import dplyr
+#' @import tidyr
+#' @import readxl
+#' @export
+
+
 write_facility_it <- function (username, password, table, mft, start, end, facility,
                                
                                directory = "", field = NA, exclude = NA, optional = TRUE,
